@@ -9900,16 +9900,6 @@
         filtersButton?.focus();
       }
 
-      // Displays the quick-create dialog. Triggered by the New button in this view.
-      function openDialog() {
-        if (!dialog) {
-          return;
-        }
-        dialog.setAttribute('aria-hidden', 'false');
-        syncBodyScrollState();
-        dialogCloseButton?.focus();
-      }
-
       // Hides the quick-create dialog and optionally refocuses the trigger. Only
       // referenced within this template.
       function closeDialog({ focusTrigger = true } = {}) {
