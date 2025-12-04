@@ -30,9 +30,8 @@
 
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
- 
-<style>
+            <dl>
+              <style>
   /* ========================================
    *  Root Variables & Base Styles
    * ======================================== */
@@ -438,21 +437,25 @@
    *  Pages Table Layout & Structure
    * ======================================== */
 
-  table.pages-table {
+  ul.mwIndexTable {
     width: 100%;
-    border-collapse: collapse;
     min-width: 960px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
-  .pages-table colgroup col.checkbox-col {
-    width: 72px;
+  .mwIndexTable li {
+    display: block;
   }
 
-  .pages-table colgroup col.wide {
-    width: 320px;
+  .mwIndexTable li dl {
+    display: flex;
+    align-items: center;
+    margin: 0;
   }
 
-  .pages-table thead {
+  .mwIndexTable li.head {
     position: sticky;
     top: calc(var(--pages-sticky-offset) + var(--pages-bulk-bar-offset));
     z-index: 15;
@@ -460,7 +463,8 @@
     box-shadow: 0 6px 12px rgba(var(--pages-shadow-rgb), 0.04);
   }
 
-  .pages-table thead th {
+  .mwIndexTable li.head dd,
+  .mwIndexTable li.head dt {
     text-align: left;
     padding: 18px 24px;
     font-size: 12px;
@@ -470,39 +474,54 @@
     color: var(--pages-muted);
     background: #f9fafc;
     border-bottom: 1px solid var(--pages-border);
+    margin: 0;
   }
 
-  .pages-table thead th.checkbox-cell {
+  .mwIndexTable li.head dd.checkbox-cell {
+    width: 72px;
     padding-left: 20px;
     padding-right: 12px;
   }
 
-  .pages-table tbody tr:not(.group-row) {
+  .mwIndexTable li.head dt {
+    flex: 1;
+    min-width: 320px;
+  }
+
+  .mwIndexTable li:not(.head):not(.group) {
     border-bottom: 1px solid var(--pages-border);
     transition: background 0.2s ease;
   }
 
-  .pages-table tbody tr:not(.group-row):hover {
+  .mwIndexTable li:not(.head):not(.group):hover {
     background: #f7f9ff;
   }
 
   /* Homepage row highlight */
-  .pages-table tbody tr.is-homepage {
+  .mwIndexTable li.is-homepage {
     background: linear-gradient(90deg, rgba(var(--pages-accent-rgb), 0.03), rgba(var(--pages-accent-rgb), 0.02));
   }
 
-  .pages-table tbody tr.is-homepage:hover {
+  .mwIndexTable li.is-homepage:hover {
     background: linear-gradient(90deg, rgba(var(--pages-accent-rgb), 0.05), rgba(var(--pages-accent-rgb), 0.04));
   }
 
-  .pages-table tbody td {
+  .mwIndexTable li:not(.head) dd,
+  .mwIndexTable li:not(.head) dt {
     padding: 10px 24px;
     font-size: 14px;
     vertical-align: middle;
     color: var(--pages-text);
+    margin: 0;
   }
 
-  .pages-table tbody td.checkbox-cell {
+  .mwIndexTable li:not(.head) dt {
+    flex: 1;
+    min-width: 320px;
+  }
+
+  .mwIndexTable li:not(.head) dd.checkbox-cell {
+    width: 72px;
     padding-left: 20px;
     padding-right: 12px;
   }
@@ -1149,7 +1168,7 @@
    * ======================================== */
 
   body.search-mode .pages-card,
-  body.search-mode .pages-table,
+  body.search-mode .mwIndexTable,
   body.search-mode .dialog,
   body.search-mode .filter-chips,
   body.search-mode .pages-tabs {
@@ -3493,68 +3512,59 @@
     </div>
 
     <div class="pages-card">
-      <table class="pages-table">
-        <colgroup>
-          <col class="checkbox-col">
-          <col class="wide">
-          <col>
-          <col>
-          <col>
-          <col>
-          <col>
-          <col>
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th scope="col" class="checkbox-cell">
+      <ul id="mwPagesIndex" class="mwIndexTable">
+
+        <li class="head">
+            <dl>
+            <dd class="checkbox-cell">
               <label class="checkbox" aria-label="Select all pages">
                 <input type="checkbox" id="masterCheckbox">
               </label>
-            </th>
-            <th scope="col">Title</th>
-            <th scope="col">
+            </dd>
+            <dt>Title</dt>
+            <dd>
               <button type="button" class="sort-button" data-sort-key="status" data-direction="desc">
                 <span>Status</span>
                 <span class="sort-indicator" aria-hidden="true">▲</span>
               </button>
-            </th>
-            <th scope="col">
+            </dd>
+            <dd>
               <button type="button" class="sort-button" data-sort-key="type" data-direction="asc">
                 <span>Type</span>
                 <span class="sort-indicator" aria-hidden="true">▲</span>
               </button>
-            </th>
-            <th scope="col">
+            </dd>
+            <dd>
               <button type="button" class="sort-button" data-sort-key="author" data-direction="asc">
                 <span>Author</span>
                 <span class="sort-indicator" aria-hidden="true">▲</span>
               </button>
-            </th>
-            <th scope="col">
+            </dd>
+            <dd>
               <button type="button" class="sort-button" data-sort-key="reports" data-direction="desc">
                 <span>Reports</span>
                 <span class="sort-indicator" aria-hidden="true">▲</span>
               </button>
-            </th>
-            <th scope="col">
+            </dd>
+            <dd>
               <button type="button" class="sort-button" data-sort-key="created" data-direction="desc">
                 <span>Created</span>
                 <span class="sort-indicator" aria-hidden="true">▲</span>
               </button>
-            </th>
-            <th scope="col">
+            </dd>
+            <dd>
               <button type="button" class="sort-button" data-sort-key="modified" data-direction="desc">
                 <span>Modified</span>
                 <span class="sort-indicator" aria-hidden="true">▲</span>
               </button>
-            </th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            class="page-row is-homepage"
+            </dd>
+            <dd>Actions</dd>
+          </dl>
+        </li>
+
+          <li
+            data-id="home"
+            class="page-row is-homepage no-children collapsed"
             data-page-id="home"
             data-status="published"
             data-type="Home"
@@ -3568,47 +3578,48 @@
             data-report-issues="performance"
             data-pinned="true"
           >
-            <td class="checkbox-cell">
-              <label class="checkbox">
-                <input type="checkbox" data-row-checkbox aria-label="Select Home">
-              </label>
-            </td>
-            <td>
-              <div class="title-cell">
-                <div class="title-text">
-                  <button type="button" class="title-button" data-open-page="home">Home</button>
-                  <span class="subtitle">home</span>
+            <dl>
+              <dd class="checkbox-cell">
+                <label class="checkbox">
+                  <input type="checkbox" data-row-checkbox aria-label="Select Home">
+                </label>
+              </dd>
+              <dt>
+                <div class="title-cell">
+                  <div class="title-text">
+                    <button type="button" class="title-button" data-open-page="home">Home</button>
+                    <span class="subtitle">home</span>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td>
-              <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Home</span></td>
-            <td>
-              <button
-                type="button"
-                class="author-filter"
-                data-author-filter="Jordan Blake"
-                title="Jordan Blake"
-                aria-label="Filter by Jordan Blake"
-              >
-                <div class="avatar">
-                  <span aria-hidden="true">JB</span>
-                </div>
-              </button>
-            </td>
-            <td>
-              <button type="button" class="reports-button" data-report-drawer="home">
-                <div class="reports-metric" data-trend="up">
-                  <strong>12.8k views</strong>
-                  <span class="metric-trend up">+12% vs last month</span>
-                </div>
-              </button>
-            </td>
-            <td data-created-label>Nov 01, 2024</td>
-            <td data-modified-label>Jul 22, 2025</td>
-            <td class="actions">
+              </dt>
+              <dd>
+                <span class="status-pill"><span class="badge published">Published</span></span>
+              </dd>
+              <dd><span class="chip">Home</span></dd>
+              <dd>
+                <button
+                  type="button"
+                  class="author-filter"
+                  data-author-filter="Jordan Blake"
+                  title="Jordan Blake"
+                  aria-label="Filter by Jordan Blake"
+                >
+                  <div class="avatar">
+                    <span aria-hidden="true">JB</span>
+                  </div>
+                </button>
+              </dd>
+              <dd>
+                <button type="button" class="reports-button" data-report-drawer="home">
+                  <div class="reports-metric" data-trend="up">
+                    <strong>12.8k views</strong>
+                    <span class="metric-trend up">+12% vs last month</span>
+                  </div>
+                </button>
+              </dd>
+              <dd data-created-label>Nov 01, 2024</dd>
+              <dd data-modified-label>Jul 22, 2025</dd>
+              <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -3667,21 +3678,24 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="group-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li
+            class="group"
             data-folder="about-us"
             data-folder-total="4"
             data-folder-name="About Us"
             data-folder-color="blue"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-folder-checkbox data-folder-id="about-us" aria-label="Select folder About Us">
               </label>
-            </td>
-            <td colspan="8">
+            </dd>
+            <dt>
               <div class="folder-header">
                 <button type="button" class="folder-toggle" data-folder-toggle="about-us" aria-expanded="true">
                   <span class="folder-icon" aria-hidden="true"><i class="fa-solid fa-folder-open" data-folder-icon></i></span>
@@ -3696,10 +3710,12 @@
                   <button type="button" data-folder-action="delete" aria-label="Trash folder" data-tooltip="Trash folder" onclick="mwWindow('wTrashfolder').show();" ><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dt>
+          </dl>
+        </li>
+
+          <li data-id="our-team"
+            class="page-row no-children collapsed"
             data-folder="about-us"
             data-page-id="our-team"
             data-status="published"
@@ -3713,24 +3729,25 @@
             data-report-direction="up"
             data-report-issues="profiles"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Our Team">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="our-team">Our Team</button>
                   <span class="subtitle">about/our-team</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Content</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Content</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -3742,18 +3759,18 @@
                   <span aria-hidden="true">AR</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="our-team">
                 <div class="reports-metric" data-trend="up">
                   <strong>4.2k views</strong>
                   <span class="metric-trend up">+6% engagement</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Jan 12, 2025</td>
-            <td data-modified-label>Jun 30, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Jan 12, 2025</dd>
+            <dd data-modified-label>Jun 30, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -3812,10 +3829,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="our-history"
+            class="page-row no-children collapsed"
             data-folder="about-us"
             data-page-id="our-history"
             data-status="published"
@@ -3829,24 +3848,25 @@
             data-report-direction="up"
             data-report-issues="none"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Our History">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="our-history">Our History</button>
                   <span class="subtitle">about/our-history</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Blog</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Blog</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -3858,18 +3878,18 @@
                   <span aria-hidden="true">JB</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="our-history">
                 <div class="reports-metric" data-trend="up">
                   <strong>1.9k views</strong>
                   <span class="metric-trend up">+3% readership</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Jan 18, 2025</td>
-            <td data-modified-label>May 24, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Jan 18, 2025</dd>
+            <dd data-modified-label>May 24, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -3928,10 +3948,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="our-locations"
+            class="page-row no-children collapsed"
             data-folder="about-us"
             data-page-id="our-locations"
             data-status="published"
@@ -3945,24 +3967,25 @@
             data-report-direction="up"
             data-report-issues="maps"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Our Locations">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="our-locations">Our Locations</button>
                   <span class="subtitle">about/our-locations</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Contact</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Contact</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -3974,18 +3997,18 @@
                   <span aria-hidden="true">PP</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="our-locations">
                 <div class="reports-metric" data-trend="up">
                   <strong>980 views</strong>
                   <span class="metric-trend up">Branch lookups ↑</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Feb 02, 2025</td>
-            <td data-modified-label>Jun 12, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Feb 02, 2025</dd>
+            <dd data-modified-label>Jun 12, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -4044,10 +4067,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="annual-reports"
+            class="page-row no-children collapsed"
             data-folder="about-us"
             data-page-id="annual-reports"
             data-status="scheduled"
@@ -4061,24 +4086,25 @@
             data-report-direction="neutral"
             data-report-issues="pending-release"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Annual Reports">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="annual-reports">Annual Reports</button>
                   <span class="subtitle">about/annual-reports</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge scheduled">Scheduled</span></span>
-            </td>
-            <td><span class="chip">Content</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Content</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -4090,18 +4116,18 @@
                   <span aria-hidden="true">DO</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="annual-reports">
                 <div class="reports-metric" data-trend="neutral">
                   <strong>--</strong>
                   <span class="metric-trend neutral">Goes live Aug 01</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Mar 04, 2025</td>
-            <td data-modified-label>Jul 10, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Mar 04, 2025</dd>
+            <dd data-modified-label>Jul 10, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -4160,21 +4186,24 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="group-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li
+            class="group"
             data-folder="programs"
             data-folder-total="3"
             data-folder-name="Programs"
             data-folder-color="teal"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-folder-checkbox data-folder-id="programs" aria-label="Select folder Programs">
               </label>
-            </td>
-            <td colspan="8">
+            </dd>
+            <dt>
               <div class="folder-header">
                 <button type="button" class="folder-toggle" data-folder-toggle="programs" aria-expanded="true">
                   <span class="folder-icon" data-color="teal" aria-hidden="true"><i class="fa-solid fa-folder-open" data-folder-icon></i></span>
@@ -4189,10 +4218,12 @@
                   <button type="button" data-folder-action="delete" aria-label="Trash folder" data-tooltip="Trash folder" onclick="mwWindow('wTrashfolder').show();" ><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dt>
+          </dl>
+        </li>
+
+          <li data-id="program-a"
+            class="page-row no-children collapsed"
             data-folder="programs"
             data-page-id="program-a"
             data-status="published"
@@ -4206,24 +4237,25 @@
             data-report-direction="up"
             data-report-issues="impact-metrics"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Program A">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="program-a">Program A</button>
                   <span class="subtitle">programs/program-a</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Event</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Event</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -4235,18 +4267,18 @@
                   <span aria-hidden="true">PP</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="program-a">
                 <div class="reports-metric" data-trend="up">
                   <strong>3.1k views</strong>
                   <span class="metric-trend up">+9% inquiries</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Jan 28, 2025</td>
-            <td data-modified-label>Jul 18, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Jan 28, 2025</dd>
+            <dd data-modified-label>Jul 18, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -4305,10 +4337,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="program-b"
+            class="page-row no-children collapsed"
             data-folder="programs"
             data-page-id="program-b"
             data-status="draft"
@@ -4322,24 +4356,25 @@
             data-report-direction="neutral"
             data-report-issues="draft"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Program B">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="program-b">Program B</button>
                   <span class="subtitle">programs/program-b</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge draft">Draft</span></span>
-            </td>
-            <td><span class="chip">Event</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Event</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -4351,18 +4386,18 @@
                   <span aria-hidden="true">DO</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="program-b">
                 <div class="reports-metric" data-trend="neutral">
                   <strong>--</strong>
                   <span class="metric-trend neutral">Draft in progress</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Feb 11, 2025</td>
-            <td data-modified-label>Jul 05, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Feb 11, 2025</dd>
+            <dd data-modified-label>Jul 05, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -4421,10 +4456,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="impact-metrics"
+            class="page-row no-children collapsed"
             data-folder="programs"
             data-page-id="impact-metrics"
             data-status="published"
@@ -4438,24 +4475,25 @@
             data-report-direction="up"
             data-report-issues="data-quality"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Impact Metrics">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="impact-metrics">Impact Metrics</button>
                   <span class="subtitle">programs/impact-metrics</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Content</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Content</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -4467,18 +4505,18 @@
                   <span aria-hidden="true">AR</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="impact-metrics">
                 <div class="reports-metric" data-trend="up">
                   <strong>540 downloads</strong>
                   <span class="metric-trend up">+5% completions</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Mar 08, 2025</td>
-            <td data-modified-label>Jul 14, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Mar 08, 2025</dd>
+            <dd data-modified-label>Jul 14, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -4537,21 +4575,24 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="group-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li
+            class="group"
             data-folder="get-involved"
             data-folder-total="3"
             data-folder-name="Get Involved"
             data-folder-color="purple"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-folder-checkbox data-folder-id="get-involved" aria-label="Select folder Get Involved">
               </label>
-            </td>
-            <td colspan="8">
+            </dd>
+            <dt>
               <div class="folder-header">
                 <button type="button" class="folder-toggle" data-folder-toggle="get-involved" aria-expanded="true">
                   <span class="folder-icon" data-color="purple" aria-hidden="true"><i class="fa-solid fa-folder-open" data-folder-icon></i></span>
@@ -4566,10 +4607,12 @@
                   <button type="button" data-folder-action="delete" aria-label="Trash folder" data-tooltip="Trash folder" onclick="mwWindow('wTrashfolder').show();" ><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dt>
+          </dl>
+        </li>
+
+          <li data-id="volunteer"
+            class="page-row no-children collapsed"
             data-folder="get-involved"
             data-page-id="volunteer"
             data-status="published"
@@ -4583,24 +4626,25 @@
             data-report-direction="up"
             data-report-issues="applications"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Volunteer">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="volunteer">Volunteer</button>
                   <span class="subtitle">get-involved/volunteer</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Landing</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Landing</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -4612,18 +4656,18 @@
                   <span aria-hidden="true">ML</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="volunteer">
                 <div class="reports-metric" data-trend="up">
                   <strong>2.7k sign-ups</strong>
                   <span class="metric-trend up">+7% volunteers</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Jan 30, 2025</td>
-            <td data-modified-label>Jul 17, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Jan 30, 2025</dd>
+            <dd data-modified-label>Jul 17, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -4682,10 +4726,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="fundraise"
+            class="page-row no-children collapsed"
             data-folder="get-involved"
             data-page-id="fundraise"
             data-status="published"
@@ -4699,24 +4745,25 @@
             data-report-direction="up"
             data-report-issues="donations"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Fundraise">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="fundraise">Fundraise</button>
                   <span class="subtitle">get-involved/fundraise</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Landing</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Landing</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -4728,18 +4775,18 @@
                   <span aria-hidden="true">ML</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="fundraise">
                 <div class="reports-metric" data-trend="up">
                   <strong>$143k raised</strong>
                   <span class="metric-trend up">+2% YoY</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Feb 22, 2025</td>
-            <td data-modified-label>Jul 11, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Feb 22, 2025</dd>
+            <dd data-modified-label>Jul 11, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -4798,10 +4845,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="become-a-partner"
+            class="page-row no-children collapsed"
             data-folder="get-involved"
             data-page-id="become-a-partner"
             data-status="published"
@@ -4815,24 +4864,25 @@
             data-report-direction="up"
             data-report-issues="form"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Become a Partner">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="become-a-partner">Become a Partner</button>
                   <span class="subtitle">get-involved/become-a-partner</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Landing</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Landing</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -4844,18 +4894,18 @@
                   <span aria-hidden="true">PP</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="become-a-partner">
                 <div class="reports-metric" data-trend="up">
                   <strong>860 partners</strong>
                   <span class="metric-trend up">+4 new orgs</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Mar 15, 2025</td>
-            <td data-modified-label>Jun 28, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Mar 15, 2025</dd>
+            <dd data-modified-label>Jun 28, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -4914,21 +4964,24 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="group-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li
+            class="group"
             data-folder="stories"
             data-folder-total="4"
             data-folder-name="Stories"
             data-folder-color="amber"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-folder-checkbox data-folder-id="stories" aria-label="Select folder Stories">
               </label>
-            </td>
-            <td colspan="8">
+            </dd>
+            <dt>
               <div class="folder-header">
                 <button type="button" class="folder-toggle" data-folder-toggle="stories" aria-expanded="true">
                   <span class="folder-icon" data-color="amber" aria-hidden="true"><i class="fa-solid fa-folder-open" data-folder-icon></i></span>
@@ -4943,10 +4996,12 @@
                   <button type="button" data-folder-action="delete" aria-label="Trash folder" data-tooltip="Trash folder" onclick="mwWindow('wTrashfolder').show();" ><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dt>
+          </dl>
+        </li>
+
+          <li data-id="blog"
+            class="page-row no-children collapsed"
             data-folder="stories"
             data-page-id="blog"
             data-status="published"
@@ -4960,24 +5015,25 @@
             data-report-direction="up"
             data-report-issues="seo-low"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Blog">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="blog">Blog</button>
                   <span class="subtitle">stories/blog</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Blog</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Blog</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -4989,18 +5045,18 @@
                   <span aria-hidden="true">JB</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="blog">
                 <div class="reports-metric" data-trend="up">
                   <strong>5.1k reads</strong>
                   <span class="metric-trend up">+11% subscribers</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Jan 05, 2025</td>
-            <td data-modified-label>Jul 19, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Jan 05, 2025</dd>
+            <dd data-modified-label>Jul 19, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -5059,10 +5115,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="success-stories"
+            class="page-row no-children collapsed"
             data-folder="stories"
             data-page-id="success-stories"
             data-status="published"
@@ -5076,24 +5134,25 @@
             data-report-direction="up"
             data-report-issues="storytelling"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Success Stories">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="success-stories">Success Stories</button>
                   <span class="subtitle">stories/success-stories</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Blog</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Blog</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -5105,18 +5164,18 @@
                   <span aria-hidden="true">AR</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="success-stories">
                 <div class="reports-metric" data-trend="up">
                   <strong>2.2k reads</strong>
                   <span class="metric-trend up">+5% reach</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Feb 08, 2025</td>
-            <td data-modified-label>Jul 09, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Feb 08, 2025</dd>
+            <dd data-modified-label>Jul 09, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -5175,10 +5234,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="photo-gallery"
+            class="page-row no-children collapsed"
             data-folder="stories"
             data-page-id="photo-gallery"
             data-status="published"
@@ -5192,24 +5253,25 @@
             data-report-direction="up"
             data-report-issues="image-alt"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Photo Gallery">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="photo-gallery">Photo Gallery</button>
                   <span class="subtitle">stories/photo-gallery</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Portfolio</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Portfolio</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -5221,18 +5283,18 @@
                   <span aria-hidden="true">PP</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="photo-gallery">
                 <div class="reports-metric" data-trend="up">
                   <strong>1.8k views</strong>
                   <span class="metric-trend up">+4% engagement</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Feb 25, 2025</td>
-            <td data-modified-label>Jun 20, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Feb 25, 2025</dd>
+            <dd data-modified-label>Jun 20, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -5291,10 +5353,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="events"
+            class="page-row no-children collapsed"
             data-folder="stories"
             data-page-id="events"
             data-status="published"
@@ -5308,24 +5372,25 @@
             data-report-direction="up"
             data-report-issues="registration"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Events">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="events">Events</button>
                   <span class="subtitle">stories/events</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Event</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Event</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -5337,18 +5402,18 @@
                   <span aria-hidden="true">ML</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="events">
                 <div class="reports-metric" data-trend="up">
                   <strong>1.3k RSVPs</strong>
                   <span class="metric-trend up">+3% attendance</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Mar 05, 2025</td>
-            <td data-modified-label>Jul 16, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Mar 05, 2025</dd>
+            <dd data-modified-label>Jul 16, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -5407,21 +5472,24 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="group-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li
+            class="group"
             data-folder="resources"
             data-folder-total="3"
             data-folder-name="Resources"
             data-folder-color="slate"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-folder-checkbox data-folder-id="resources" aria-label="Select folder Resources">
               </label>
-            </td>
-            <td colspan="8">
+            </dd>
+            <dt>
               <div class="folder-header">
                 <button type="button" class="folder-toggle" data-folder-toggle="resources" aria-expanded="true">
                   <span class="folder-icon" data-color="slate" aria-hidden="true"><i class="fa-solid fa-folder-open" data-folder-icon></i></span>
@@ -5436,10 +5504,12 @@
                   <button type="button" data-folder-action="delete" aria-label="Trash folder" data-tooltip="Trash folder" onclick="mwWindow('wTrashfolder').show();" ><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dt>
+          </dl>
+        </li>
+
+          <li data-id="faqs"
+            class="page-row no-children collapsed"
             data-folder="resources"
             data-page-id="faqs"
             data-status="published"
@@ -5453,24 +5523,25 @@
             data-report-direction="up"
             data-report-issues="top-questions"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select FAQs">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="faqs">FAQs</button>
                   <span class="subtitle">resources/faqs</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Contact</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Contact</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -5482,18 +5553,18 @@
                   <span aria-hidden="true">DO</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="faqs">
                 <div class="reports-metric" data-trend="up">
                   <strong>3.9k visits</strong>
                   <span class="metric-trend up">+8% solved</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Jan 16, 2025</td>
-            <td data-modified-label>Jul 08, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Jan 16, 2025</dd>
+            <dd data-modified-label>Jul 08, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -5552,10 +5623,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="downloads-forms"
+            class="page-row no-children collapsed"
             data-folder="resources"
             data-page-id="downloads-forms"
             data-status="published"
@@ -5569,24 +5642,25 @@
             data-report-direction="up"
             data-report-issues="file-expiry"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Downloads & Forms">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="downloads-forms">Downloads & Forms</button>
                   <span class="subtitle">resources/downloads-forms</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Content</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Content</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -5598,18 +5672,18 @@
                   <span aria-hidden="true">AR</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="downloads-forms">
                 <div class="reports-metric" data-trend="up">
                   <strong>2.5k downloads</strong>
                   <span class="metric-trend up">+4% completion</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Feb 10, 2025</td>
-            <td data-modified-label>Jul 06, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Feb 10, 2025</dd>
+            <dd data-modified-label>Jul 06, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -5668,10 +5742,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="newsroom-press"
+            class="page-row no-children collapsed"
             data-folder="resources"
             data-page-id="newsroom-press"
             data-status="published"
@@ -5685,24 +5761,25 @@
             data-report-direction="up"
             data-report-issues="press"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Newsroom & Press">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="newsroom-press">Newsroom & Press</button>
                   <span class="subtitle">resources/newsroom-press</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Blog</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Blog</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -5714,18 +5791,18 @@
                   <span aria-hidden="true">JB</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="newsroom-press">
                 <div class="reports-metric" data-trend="up">
                   <strong>1.7k views</strong>
                   <span class="metric-trend up">+3% media hits</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Feb 27, 2025</td>
-            <td data-modified-label>Jul 03, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Feb 27, 2025</dd>
+            <dd data-modified-label>Jul 03, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -5784,10 +5861,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="contact"
+            class="page-row no-children collapsed"
             data-page-id="contact"
             data-status="published"
             data-type="Contact"
@@ -5800,24 +5879,25 @@
             data-report-direction="up"
             data-report-issues="response-time"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Contact">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="contact">Contact</button>
                   <span class="subtitle">contact</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Contact</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Contact</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -5829,18 +5909,18 @@
                   <span aria-hidden="true">AR</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="contact">
                 <div class="reports-metric" data-trend="up">
                   <strong>2.9k inquiries</strong>
                   <span class="metric-trend up">+4% satisfaction</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Jan 09, 2025</td>
-            <td data-modified-label>Jul 18, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Jan 09, 2025</dd>
+            <dd data-modified-label>Jul 18, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -5899,21 +5979,24 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="group-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li
+            class="group"
             data-folder="utility"
             data-folder-total="2"
             data-folder-name="Utility"
             data-folder-color="purple"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-folder-checkbox data-folder-id="utility" aria-label="Select folder Utility">
               </label>
-            </td>
-            <td colspan="8">
+            </dd>
+            <dt>
               <div class="folder-header">
                 <button type="button" class="folder-toggle" data-folder-toggle="utility" aria-expanded="true">
                   <span class="folder-icon" data-color="purple" aria-hidden="true"><i class="fa-solid fa-folder-open" data-folder-icon></i></span>
@@ -5928,10 +6011,12 @@
                   <button type="button" data-folder-action="delete" aria-label="Trash folder" data-tooltip="Trash folder" onclick="mwWindow('wTrashfolder').show();" ><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dt>
+          </dl>
+        </li>
+
+          <li data-id="utility-contact"
+            class="page-row no-children collapsed"
             data-folder="utility"
             data-page-id="utility-contact"
             data-status="published"
@@ -5945,24 +6030,25 @@
             data-report-direction="up"
             data-report-issues="directory"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Contact">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="utility-contact">Contact</button>
                   <span class="subtitle">utility/contact</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Content</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Content</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -5974,18 +6060,18 @@
                   <span aria-hidden="true">ML</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="utility-contact">
                 <div class="reports-metric" data-trend="up">
                   <strong>420 lookups</strong>
                   <span class="metric-trend up">+1% team use</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Jan 07, 2025</td>
-            <td data-modified-label>Jul 15, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Jan 07, 2025</dd>
+            <dd data-modified-label>Jul 15, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -6044,10 +6130,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="member-login"
+            class="page-row no-children collapsed"
             data-folder="utility"
             data-page-id="member-login"
             data-status="published"
@@ -6061,24 +6149,25 @@
             data-report-direction="up"
             data-report-issues="sso"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Member Login">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="member-login">Member Login</button>
                   <span class="subtitle">utility/member-login</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge published">Published</span></span>
-            </td>
-            <td><span class="chip">Contact</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Contact</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -6090,18 +6179,18 @@
                   <span aria-hidden="true">DO</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="member-login">
                 <div class="reports-metric" data-trend="up">
                   <strong>3.1k logins</strong>
                   <span class="metric-trend up">+5% retention</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Jan 21, 2025</td>
-            <td data-modified-label>Jul 13, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Jan 21, 2025</dd>
+            <dd data-modified-label>Jul 13, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -6160,10 +6249,12 @@
                   </button>
           </div>
         </div>
-      </td>
-    </tr>
-          <tr
-            class="page-row"
+      </dd>
+    </dl>
+        </li>
+
+          <li data-id="summer-campaign"
+            class="page-row no-children collapsed"
             data-page-id="summer-campaign"
             data-status="unpublished"
             data-type="Landing"
@@ -6176,24 +6267,25 @@
             data-report-direction="neutral"
             data-report-issues="awaiting-approval"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Summer Campaign">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="summer-campaign">Summer Campaign</button>
                   <span class="subtitle">campaigns/summer-2025</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge unpublished">Unpublished</span></span>
-            </td>
-            <td><span class="chip">Landing</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Landing</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -6205,18 +6297,18 @@
                   <span aria-hidden="true">PP</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="summer-campaign">
                 <div class="reports-metric" data-trend="neutral">
                   <strong>--</strong>
                   <span class="metric-trend neutral">Awaiting approval</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Jun 05, 2025</td>
-            <td data-modified-label>Jul 28, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Jun 05, 2025</dd>
+            <dd data-modified-label>Jul 28, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -6275,10 +6367,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="press-kit-refresh"
+            class="page-row no-children collapsed"
             data-page-id="press-kit-refresh"
             data-status="unpublished"
             data-type="Content"
@@ -6291,24 +6385,25 @@
             data-report-direction="neutral"
             data-report-issues="brand-review"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Press Kit Refresh">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="press-kit-refresh">Press Kit Refresh</button>
                   <span class="subtitle">newsroom/press-kit</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge unpublished">Unpublished</span></span>
-            </td>
-            <td><span class="chip">Content</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Content</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -6320,18 +6415,18 @@
                   <span aria-hidden="true">AR</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="press-kit-refresh">
                 <div class="reports-metric" data-trend="neutral">
                   <strong>--</strong>
                   <span class="metric-trend neutral">Brand review in progress</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>May 12, 2025</td>
-            <td data-modified-label>Jul 11, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>May 12, 2025</dd>
+            <dd data-modified-label>Jul 11, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -6390,10 +6485,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="donor-portal-onboarding"
+            class="page-row no-children collapsed"
             data-page-id="donor-portal-onboarding"
             data-status="unpublished"
             data-type="Contact"
@@ -6406,24 +6503,25 @@
             data-report-direction="neutral"
             data-report-issues="integration-testing"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Donor Portal Onboarding">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="donor-portal-onboarding">Donor Portal Onboarding</button>
                   <span class="subtitle">donors/onboarding</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge unpublished">Unpublished</span></span>
-            </td>
-            <td><span class="chip">Contact</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Contact</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -6435,18 +6533,18 @@
                   <span aria-hidden="true">JB</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="donor-portal-onboarding">
                 <div class="reports-metric" data-trend="neutral">
                   <strong>--</strong>
                   <span class="metric-trend neutral">Integration tests pending</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>May 30, 2025</td>
-            <td data-modified-label>Jul 09, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>May 30, 2025</dd>
+            <dd data-modified-label>Jul 09, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page onclick="mwWindow('wDuplicatepage').show();"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
@@ -6505,10 +6603,12 @@
                   </button>
                 </div>
               </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="old-promotions"
+            class="page-row no-children collapsed"
             data-page-id="old-promotions"
             data-status="trash"
             data-type="Landing"
@@ -6520,24 +6620,25 @@
             data-report-trend="-15"
             data-report-direction="down"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Old Promotions">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="old-promotions">Old Promotions</button>
                   <span class="subtitle">marketing/old-promotions</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge trash">Trash</span></span>
-            </td>
-            <td><span class="chip">Landing</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Landing</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -6549,24 +6650,26 @@
                   <span aria-hidden="true">JB</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="old-promotions">
                 <div class="reports-metric" data-trend="down">
                   <strong>850 views</strong>
                   <span class="metric-trend down">-15% engagement</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Mar 15, 2024</td>
-            <td data-modified-label>Aug 20, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Mar 15, 2024</dd>
+            <dd data-modified-label>Aug 20, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Restore page" data-tooltip="Restore page" data-menu-action="restore" onclick="mwWindow('wRestorepage').show();" ><i class="fa-solid fa-arrow-rotate-left"></i></button>
               <button type="button" aria-label="Delete permanently" data-tooltip="Delete permanently" data-menu-action="delete" onclick="mwWindow('wDeletepermanently').show();" ><i class="fa-solid fa-trash-can"></i></button>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="legacy-product-catalog"
+            class="page-row no-children collapsed"
             data-page-id="legacy-product-catalog"
             data-status="trash"
             data-type="Portfolio"
@@ -6578,24 +6681,25 @@
             data-report-trend="-22"
             data-report-direction="down"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Legacy Product Catalog">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="legacy-product-catalog">Legacy Product Catalog</button>
                   <span class="subtitle">products/legacy-catalog</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge trash">Trash</span></span>
-            </td>
-            <td><span class="chip">Portfolio</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Portfolio</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -6607,24 +6711,26 @@
                   <span aria-hidden="true">AR</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="legacy-product-catalog">
                 <div class="reports-metric" data-trend="down">
                   <strong>1.2k views</strong>
                   <span class="metric-trend down">-22% traffic</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Nov 08, 2023</td>
-            <td data-modified-label>Aug 18, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Nov 08, 2023</dd>
+            <dd data-modified-label>Aug 18, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Restore page" data-tooltip="Restore page" data-menu-action="restore" onclick="mwWindow('wRestorepage').show();" ><i class="fa-solid fa-arrow-rotate-left"></i></button>
               <button type="button" aria-label="Delete permanently" data-tooltip="Delete permanently" data-menu-action="delete" onclick="mwWindow('wDeletepermanently').show();" ><i class="fa-solid fa-trash-can"></i></button>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="discontinued-services"
+            class="page-row no-children collapsed"
             data-page-id="discontinued-services"
             data-status="trash"
             data-type="Content"
@@ -6636,24 +6742,25 @@
             data-report-trend="-45"
             data-report-direction="down"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Discontinued Services">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="discontinued-services">Discontinued Services</button>
                   <span class="subtitle">services/discontinued</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge trash">Trash</span></span>
-            </td>
-            <td><span class="chip">Content</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Content</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -6665,24 +6772,26 @@
                   <span aria-hidden="true">DO</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="discontinued-services">
                 <div class="reports-metric" data-trend="down">
                   <strong>320 views</strong>
                   <span class="metric-trend down">-45% engagement</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Jun 12, 2024</td>
-            <td data-modified-label>Aug 15, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Jun 12, 2024</dd>
+            <dd data-modified-label>Aug 15, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Restore page" data-tooltip="Restore page" data-menu-action="restore" onclick="mwWindow('wRestorepage').show();" ><i class="fa-solid fa-arrow-rotate-left"></i></button>
               <button type="button" aria-label="Delete permanently" data-tooltip="Delete permanently" data-menu-action="delete" onclick="mwWindow('wDeletepermanently').show();" ><i class="fa-solid fa-trash-can"></i></button>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
+            </dd>
+          </dl>
+        </li>
+
+          <li data-id="test-page-draft"
+            class="page-row no-children collapsed"
             data-page-id="test-page-draft"
             data-status="trash"
             data-type="Content"
@@ -6694,24 +6803,25 @@
             data-report-trend="0"
             data-report-direction="neutral"
           >
-            <td class="checkbox-cell">
+            <dl>
+              <dd class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Test Page Draft">
               </label>
-            </td>
-            <td>
+            </dd>
+            <dt>
               <div class="title-cell">
                 <div class="title-text">
                   <button type="button" class="title-button" data-open-page="test-page-draft">Test Page Draft</button>
                   <span class="subtitle">testing/test-draft</span>
                 </div>
               </div>
-            </td>
-            <td>
+            </dt>
+            <dd>
               <span class="status-pill"><span class="badge trash">Trash</span></span>
-            </td>
-            <td><span class="chip">Content</span></td>
-            <td>
+            </dd>
+            <dd><span class="chip">Content</span></dd>
+            <dd>
               <button
                 type="button"
                 class="author-filter"
@@ -6723,24 +6833,26 @@
                   <span aria-hidden="true">JB</span>
                 </div>
               </button>
-            </td>
-            <td>
+            </dd>
+            <dd>
               <button type="button" class="reports-button" data-report-drawer="test-page-draft">
                 <div class="reports-metric" data-trend="neutral">
                   <strong>45 views</strong>
                   <span class="metric-trend neutral">No change</span>
                 </div>
               </button>
-            </td>
-            <td data-created-label>Jul 01, 2025</td>
-            <td data-modified-label>Aug 10, 2025</td>
-            <td class="actions">
+            </dd>
+            <dd data-created-label>Jul 01, 2025</dd>
+            <dd data-modified-label>Aug 10, 2025</dd>
+            <dd class="actions">
               <button type="button" aria-label="Restore page" data-tooltip="Restore page" data-menu-action="restore" onclick="mwWindow('wRestorepage').show();" ><i class="fa-solid fa-arrow-rotate-left"></i></button>
               <button type="button" aria-label="Delete permanently" data-tooltip="Delete permanently" data-menu-action="delete" onclick="mwWindow('wDeletepermanently').show();" ><i class="fa-solid fa-trash-can"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            </dd>
+          </dl>
+        </li>
+
+        
+      </ul>
     </div>
   </div>
 
@@ -6910,35 +7022,40 @@
           <div class="analytics-card-body">
             <ul class="analytics-metric-list">
               <li class="analytics-metric">
-                <div class="analytics-metric-main">
+            <dl>
+              <div class="analytics-metric-main">
                   <span class="analytics-metric-label">Page Rank</span>
                   <span class="analytics-metric-value">#1</span>
                 </div>
                 <span class="analytics-chip is-good">Leading</span>
               </li>
               <li class="analytics-metric">
-                <div class="analytics-metric-main">
+            <dl>
+              <div class="analytics-metric-main">
                   <span class="analytics-metric-label">Word Count</span>
                   <span class="analytics-metric-value">847 words</span>
                 </div>
                 <span class="analytics-chip is-good">Balanced</span>
               </li>
               <li class="analytics-metric">
-                <div class="analytics-metric-main">
+            <dl>
+              <div class="analytics-metric-main">
                   <span class="analytics-metric-label">Images</span>
                   <span class="analytics-metric-value">12 assets</span>
                 </div>
                 <span class="analytics-chip is-caution">Alt text audit</span>
               </li>
               <li class="analytics-metric">
-                <div class="analytics-metric-main">
+            <dl>
+              <div class="analytics-metric-main">
                   <span class="analytics-metric-label">Links</span>
                   <span class="analytics-metric-value">18 total</span>
                 </div>
                 <span class="analytics-chip is-issue">2 broken</span>
               </li>
               <li class="analytics-metric">
-                <div class="analytics-metric-main">
+            <dl>
+              <div class="analytics-metric-main">
                   <span class="analytics-metric-label">Last Edited</span>
                   <span class="analytics-metric-value">Jul 22, 2025</span>
                 </div>
@@ -6958,35 +7075,40 @@
           <div class="analytics-card-body">
             <ul class="analytics-metric-list">
               <li class="analytics-metric">
-                <div class="analytics-metric-main">
+            <dl>
+              <div class="analytics-metric-main">
                   <span class="analytics-metric-label">Meta Title</span>
                   <span class="analytics-metric-value">Optimized</span>
                 </div>
                 <span class="analytics-chip is-good">Green</span>
               </li>
               <li class="analytics-metric">
-                <div class="analytics-metric-main">
+            <dl>
+              <div class="analytics-metric-main">
                   <span class="analytics-metric-label">Meta Description</span>
                   <span class="analytics-metric-value">Too long</span>
                 </div>
                 <span class="analytics-chip is-caution">-12 chars</span>
               </li>
               <li class="analytics-metric">
-                <div class="analytics-metric-main">
+            <dl>
+              <div class="analytics-metric-main">
                   <span class="analytics-metric-label">Open Graph</span>
                   <span class="analytics-metric-value">Complete</span>
                 </div>
                 <span class="analytics-chip is-good">Share ready</span>
               </li>
               <li class="analytics-metric">
-                <div class="analytics-metric-main">
+            <dl>
+              <div class="analytics-metric-main">
                   <span class="analytics-metric-label">Schema</span>
                   <span class="analytics-metric-value">Article & Breadcrumb</span>
                 </div>
                 <span class="analytics-chip is-good">Valid</span>
               </li>
               <li class="analytics-metric">
-                <div class="analytics-metric-main">
+            <dl>
+              <div class="analytics-metric-main">
                   <span class="analytics-metric-label">Page Speed</span>
                   <span class="analytics-metric-value">91 (mobile)</span>
                 </div>
@@ -7005,35 +7127,40 @@
           <div class="analytics-card-body">
             <ul class="analytics-metric-list">
               <li class="analytics-metric">
-                <div class="analytics-metric-main">
+            <dl>
+              <div class="analytics-metric-main">
                   <span class="analytics-metric-label">Heading Hierarchy</span>
                   <span class="analytics-metric-value">1 issue</span>
                 </div>
                 <span class="analytics-chip is-issue">Missing H2</span>
               </li>
               <li class="analytics-metric">
-                <div class="analytics-metric-main">
+            <dl>
+              <div class="analytics-metric-main">
                   <span class="analytics-metric-label">Image Alt Text</span>
                   <span class="analytics-metric-value">2 warnings</span>
                 </div>
                 <span class="analytics-chip is-caution">Decorative?</span>
               </li>
               <li class="analytics-metric">
-                <div class="analytics-metric-main">
+            <dl>
+              <div class="analytics-metric-main">
                   <span class="analytics-metric-label">Keyboard Navigation</span>
                   <span class="analytics-metric-value">Pass</span>
                 </div>
                 <span class="analytics-chip is-good">Focusable</span>
               </li>
               <li class="analytics-metric">
-                <div class="analytics-metric-main">
+            <dl>
+              <div class="analytics-metric-main">
                   <span class="analytics-metric-label">Color Contrast</span>
                   <span class="analytics-metric-value">AA compliant</span>
                 </div>
                 <span class="analytics-chip is-good">Pass</span>
               </li>
               <li class="analytics-metric">
-                <div class="analytics-metric-main">
+            <dl>
+              <div class="analytics-metric-main">
                   <span class="analytics-metric-label">ARIA Labels</span>
                   <span class="analytics-metric-value">Optimized</span>
                 </div>
@@ -7306,7 +7433,7 @@
           analyticsRowElement = document.createElement('tr');
           analyticsRowElement.className = 'page-analytics-row';
         }
-        analyticsRowElement.innerHTML = `<td colspan="${columnCount}">${renderAnalyticsDrawerContent()}</td>`;
+        analyticsRowElement.innerHTML = `<dd colspan="${columnCount}">${renderAnalyticsDrawerContent()}</dt>`;
         analyticsRowElement.classList.remove('is-open');
         row.insertAdjacentElement('afterend', analyticsRowElement);
         if (analyticsActiveRow) {
@@ -7334,10 +7461,10 @@
         }
       }
 
-      const pagesTableElement = document.querySelector('.pages-table');
+      const pagesTableElement = document.querySelector('.mwIndexTable');
       analyticsColumnCount = Math.max(
         1,
-        pagesTableElement?.querySelectorAll('thead th').length || 9
+        pagesTableElement?.querySelectorAll('li.head dd, li.head dt').length || 9
       );
 
       const searchInput = document.getElementById('pagesSearch');
