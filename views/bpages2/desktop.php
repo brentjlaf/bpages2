@@ -329,7 +329,7 @@
 }
 
 /* Tab styling */
-.tabs-row {
+.winTabs {
 	display: flex;
 	gap: 8px;
 	padding: 8px 16px 0;
@@ -423,15 +423,6 @@
 
 </div>
 
-<div class="tabs-row">
-	<button class="tab-button active" type="button" data-status-tab="all">All <span class="tab-badge" data-status-count="all">28</span></button>
-	<button class="tab-button" type="button" data-status-tab="published">Published <span class="tab-badge" data-status-count="published">18</span></button>
-	<button class="tab-button" type="button" data-status-tab="unpublished">Unpublished <span class="tab-badge" data-status-count="unpublished">6</span></button>
-	<button class="tab-button" type="button" data-status-tab="draft">Drafts <span class="tab-badge" data-status-count="draft">3</span></button>
-	<button class="tab-button" type="button" data-status-tab="scheduled">Scheduled <span class="tab-badge" data-status-count="scheduled">1</span></button>
-	<button class="tab-button" type="button" data-status-tab="trash">Trash <span class="tab-badge" data-status-count="trash">0</span></button>
-</div>
-
 <div class="bulk-actions-bar" id="bulkActionsBar" aria-hidden="true">
 	<div class="bulk-summary">
 		<i class="fa-solid fa-layer-group"></i>
@@ -447,6 +438,15 @@
 </div>
 
 <div class="mwDesktop">
+
+	<div class="winTabs">
+		<button class="tab-button active" type="button" data-status-tab="all">All <span class="tab-badge" data-status-count="all">28</span></button>
+		<button class="tab-button" type="button" data-status-tab="published">Published <span class="tab-badge" data-status-count="published">18</span></button>
+		<button class="tab-button" type="button" data-status-tab="unpublished">Unpublished <span class="tab-badge" data-status-count="unpublished">6</span></button>
+		<button class="tab-button" type="button" data-status-tab="draft">Drafts <span class="tab-badge" data-status-count="draft">3</span></button>
+		<button class="tab-button" type="button" data-status-tab="scheduled">Scheduled <span class="tab-badge" data-status-count="scheduled">1</span></button>
+		<button class="tab-button" type="button" data-status-tab="trash">Trash <span class="tab-badge" data-status-count="trash">0</span></button>
+	</div>
 
 	<ul id="mwPagesIndex" class="mwIndexTable">
 
