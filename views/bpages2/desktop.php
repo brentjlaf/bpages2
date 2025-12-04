@@ -371,14 +371,55 @@
 	color: #1e40af;
 }
 
+/* Search input */
+.search-input {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+}
+
+.search-input input {
+	width: 260px;
+	padding: 10px 16px 10px 38px;
+	border-radius: 6px;
+	border: 1px solid #e5e7eb;
+	background: white;
+	font-size: 14px;
+	color: #1f2937;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input input:focus {
+	outline: none;
+	border-color: #2563eb;
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.search-input i {
+	position: absolute;
+	left: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #6b7280;
+	font-size: 14px;
+	pointer-events: none;
+}
+
 </style>
 
 <div class="mwDskTools">
 
 	<h1><span>Pages</span> Manager</h1>
 
-	<a class="Add" onclick="mwWindow('wNewfolder').show();">New Folder</a>
+	<div class="search-input">
+		<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+		<input type="search" id="pagesSearch" placeholder="Search pages" aria-label="Search pages">
+	</div>
+
 	<a class="Add" onclick="mwWindow('wFilterit').show();">Filter</a>
+
+	<a class="Add" onclick="mwWindow('wPagesettings').show();">New Page</a>
+	<a class="Add" onclick="mwWindow('wNewfolder').show();">New Folder</a>
 
 </div>
 
@@ -804,6 +845,22 @@
 <script type="text/javascript">
 
 	jQuery( function () {
+
+		// Search functionality
+		jQuery('#pagesSearch').on('input', function() {
+			const searchTerm = jQuery(this).val().toLowerCase().trim();
+
+			jQuery('.page-row').each(function() {
+				const title = jQuery(this).find('.title-button').text().toLowerCase();
+				const subtitle = jQuery(this).find('.subtitle').text().toLowerCase();
+
+				if (searchTerm === '' || title.includes(searchTerm) || subtitle.includes(searchTerm)) {
+					jQuery(this).show();
+				} else {
+					jQuery(this).hide();
+				}
+			});
+		});
 
 		// Master checkbox functionality
 		jQuery('#masterCheckbox').on('change', function() {
