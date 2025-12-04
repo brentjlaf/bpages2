@@ -279,6 +279,54 @@
 	color: #dc2626;
 }
 
+/* Search input */
+.search-input {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+}
+
+.search-input input {
+	width: 260px;
+	padding: 10px 76px 10px 38px;
+	border-radius: 10px;
+	border: 1px solid #e5e7eb;
+	background: white;
+	font-size: 14px;
+	color: #1f2937;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input input:focus {
+	outline: none;
+	border-color: #2563eb;
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.search-input i {
+	position: absolute;
+	left: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #6b7280;
+	font-size: 14px;
+	pointer-events: none;
+}
+
+.shortcut-hint {
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 12px;
+	font-weight: 600;
+	color: #6b7280;
+	background: #f3f4f6;
+	border-radius: 6px;
+	padding: 4px 8px;
+	pointer-events: none;
+}
+
 /* Bulk actions bar */
 .bulk-actions-bar {
 	display: none;
@@ -377,8 +425,15 @@
 
 	<h1><span>Pages</span> Manager</h1>
 
-	<a class="Add" onclick="mwWindow('wNewfolder').show();">New Folder</a>
+	<div class="search-input">
+		<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+		<input type="search" id="pagesSearch" placeholder="Search pages" aria-label="Search pages">
+		<span class="shortcut-hint" aria-hidden="true">⌘ /</span>
+	</div>
+
 	<a class="Add" onclick="mwWindow('wFilterit').show();">Filter</a>
+	<a class="Add" onclick="mwWindow('wPagesettings').show();">New Page</a>
+	<a class="Add" onclick="mwWindow('wNewfolder').show();">New Folder</a>
 
 </div>
 
@@ -883,6 +938,48 @@
 
 		// Initialize folders as expanded
 		jQuery('.group').addClass('expanded');
+
+		// Search functionality
+		jQuery('#pagesSearch').on('input', function() {
+			const searchTerm = jQuery(this).val().toLowerCase();
+
+			if (searchTerm === '') {
+				jQuery('.page-row').show();
+				jQuery('.group').show();
+				return;
+			}
+
+			jQuery('.page-row').each(function() {
+				const title = jQuery(this).find('.title-button').text().toLowerCase();
+				const subtitle = jQuery(this).find('.subtitle').text().toLowerCase();
+				const matches = title.includes(searchTerm) || subtitle.includes(searchTerm);
+
+				if (matches) {
+					jQuery(this).show();
+				} else {
+					jQuery(this).hide();
+				}
+			});
+
+			// Hide empty folders
+			jQuery('.group').each(function() {
+				const folderId = jQuery(this).data('folder');
+				const visiblePages = jQuery('[data-folder="' + folderId + '"]:visible').length;
+				if (visiblePages > 0) {
+					jQuery(this).show();
+				} else {
+					jQuery(this).hide();
+				}
+			});
+		});
+
+		// Keyboard shortcut for search (Cmd+/ or Ctrl+/)
+		jQuery(document).on('keydown', function(e) {
+			if ((e.metaKey || e.ctrlKey) && e.key === '/') {
+				e.preventDefault();
+				jQuery('#pagesSearch').focus();
+			}
+		});
 
 	}); //jQuery
 
