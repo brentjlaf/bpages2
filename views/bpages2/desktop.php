@@ -1795,6 +1795,7 @@
     display: flex;
     justify-content: flex-end;
     gap: 6px;
+    overflow: visible;
   }
 
   .actions button {
