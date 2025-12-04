@@ -481,11 +481,7 @@
 				</dt>
 				<dd><span class="badge published">Published</span></dd>
 				<dd><span class="chip">Home</span></dd>
-				<dd>
-					<button type="button" class="author-filter">
-						<div class="avatar">JB</div>
-					</button>
-				</dd>
+				<dd>Jordan Blake</dd>
 				<dd>
 					<button type="button" class="reports-button">
 						<div class="reports-metric">
@@ -541,11 +537,7 @@
 				</dt>
 				<dd><span class="badge published">Published</span></dd>
 				<dd><span class="chip">Content</span></dd>
-				<dd>
-					<button type="button" class="author-filter">
-						<div class="avatar">AR</div>
-					</button>
-				</dd>
+				<dd>Amelia Reed</dd>
 				<dd>
 					<button type="button" class="reports-button">
 						<div class="reports-metric">
@@ -577,11 +569,7 @@
 				</dt>
 				<dd><span class="badge published">Published</span></dd>
 				<dd><span class="chip">Content</span></dd>
-				<dd>
-					<button type="button" class="author-filter">
-						<div class="avatar">JB</div>
-					</button>
-				</dd>
+				<dd>Jordan Blake</dd>
 				<dd>
 					<button type="button" class="reports-button">
 						<div class="reports-metric">
@@ -613,11 +601,7 @@
 				</dt>
 				<dd><span class="badge draft">Draft</span></dd>
 				<dd><span class="chip">Content</span></dd>
-				<dd>
-					<button type="button" class="author-filter">
-						<div class="avatar">TC</div>
-					</button>
-				</dd>
+				<dd>Taylor Collins</dd>
 				<dd>
 					<button type="button" class="reports-button">
 						<div class="reports-metric">
@@ -648,11 +632,7 @@
 				</dt>
 				<dd><span class="badge published">Published</span></dd>
 				<dd><span class="chip">Contact</span></dd>
-				<dd>
-					<button type="button" class="author-filter">
-						<div class="avatar">JB</div>
-					</button>
-				</dd>
+				<dd>Jordan Blake</dd>
 				<dd>
 					<button type="button" class="reports-button">
 						<div class="reports-metric">
@@ -708,11 +688,7 @@
 				</dt>
 				<dd><span class="badge published">Published</span></dd>
 				<dd><span class="chip">Programs</span></dd>
-				<dd>
-					<button type="button" class="author-filter">
-						<div class="avatar">AR</div>
-					</button>
-				</dd>
+				<dd>Amelia Reed</dd>
 				<dd>
 					<button type="button" class="reports-button">
 						<div class="reports-metric">
@@ -744,11 +720,7 @@
 				</dt>
 				<dd><span class="badge published">Published</span></dd>
 				<dd><span class="chip">Programs</span></dd>
-				<dd>
-					<button type="button" class="author-filter">
-						<div class="avatar">TC</div>
-					</button>
-				</dd>
+				<dd>Taylor Collins</dd>
 				<dd>
 					<button type="button" class="reports-button">
 						<div class="reports-metric">
@@ -780,11 +752,7 @@
 				</dt>
 				<dd><span class="badge unpublished">Unpublished</span></dd>
 				<dd><span class="chip">Programs</span></dd>
-				<dd>
-					<button type="button" class="author-filter">
-						<div class="avatar">AR</div>
-					</button>
-				</dd>
+				<dd>Amelia Reed</dd>
 				<dd>
 					<button type="button" class="reports-button">
 						<div class="reports-metric">
@@ -815,11 +783,7 @@
 				</dt>
 				<dd><span class="badge published">Published</span></dd>
 				<dd><span class="chip">Programs</span></dd>
-				<dd>
-					<button type="button" class="author-filter">
-						<div class="avatar">JB</div>
-					</button>
-				</dd>
+				<dd>Jordan Blake</dd>
 				<dd>
 					<button type="button" class="reports-button">
 						<div class="reports-metric">
